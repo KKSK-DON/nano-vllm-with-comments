@@ -42,6 +42,7 @@ class LLMEngine:
     def add_request(self, prompt: str | list[int], sampling_params: SamplingParams):
         if isinstance(prompt, str):
             prompt = self.tokenizer.encode(prompt)
+        # init it with waiting status. status: wating -> running -> finished
         seq = Sequence(prompt, sampling_params)
         self.scheduler.add(seq)
 
