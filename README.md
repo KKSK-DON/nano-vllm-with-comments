@@ -6,7 +6,9 @@
 <a href="https://trendshift.io/repositories/15323" target="_blank"><img src="https://trendshift.io/api/badge/repositories/15323" alt="GeeeekExplorer%2Fnano-vllm | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
 </p>
 
-# Nano-vLLM
+# Nano-vLLM (Annotated Fork)
+
+> This is a fork of [GeeeekExplorer/nano-vllm](https://github.com/GeeeekExplorer/nano-vllm) with detailed comments added throughout the codebase to help understand the internals of a vLLM-like inference engine.
 
 A lightweight vLLM implementation built from scratch.
 
@@ -15,11 +17,12 @@ A lightweight vLLM implementation built from scratch.
 * 🚀 **Fast offline inference** - Comparable inference speeds to vLLM
 * 📖 **Readable codebase** - Clean implementation in ~ 1,200 lines of Python code
 * ⚡ **Optimization Suite** - Prefix caching, Tensor Parallelism, Torch compilation, CUDA graph, etc.
+* 💬 **Detailed Comments** - Line-by-line annotations covering scheduling, block management, attention, model runner, and more
 
 ## Installation
 
 ```bash
-pip install git+https://github.com/GeeeekExplorer/nano-vllm.git
+pip install git+https://github.com/KKSK-DON/nano-vllm.git
 ```
 
 ## Model Download
@@ -63,4 +66,4 @@ See `bench.py` for benchmark.
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=GeeeekExplorer/nano-vllm&type=Date)](https://www.star-history.com/#GeeeekExplorer/nano-vllm&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=KKSK-DON/nano-vllm&type=Date)](https://www.star-history.com/#KKSK-DON/nano-vllm&Date)
