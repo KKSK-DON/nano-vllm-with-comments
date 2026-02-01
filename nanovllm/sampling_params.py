@@ -8,4 +8,7 @@ class SamplingParams:
     ignore_eos: bool = False
 
     def __post_init__(self):
+        # divide 0 -> Nan
+        # even if do special handling but not good for graph capture
+        # set a very small number ~= greedy sampling
         assert self.temperature > 1e-10, "greedy sampling is not permitted"

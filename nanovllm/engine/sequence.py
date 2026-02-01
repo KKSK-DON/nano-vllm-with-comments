@@ -16,14 +16,20 @@ class Sequence:
     counter = count()
 
     def __init__(self, token_ids: list[int], sampling_params = SamplingParams()):
-        self.seq_id = next(Sequence.counter)
+        self.seq_id = next(Sequence.counter) # unique id
         self.status = SequenceStatus.WAITING
         self.token_ids = copy(token_ids)
-        self.last_token = token_ids[-1]
+        self.last_token = token_ids[-1] # used for decode
         self.num_tokens = len(self.token_ids)
         self.num_prompt_tokens = len(token_ids)
         self.num_cached_tokens = 0
-        self.block_table = []
+        """
+        e.g. seq.block_table = [5, 12, 3]
+        0: # of block_size tokens in physical block 5
+        1: # of block_size tokens in physical block 12
+        2: # of block_size tokens in physical block 3
+        """
+        self.block_table: list[int] = [] # used for kvcache physical memeory blocks
         self.temperature = sampling_params.temperature
         self.max_tokens = sampling_params.max_tokens
         self.ignore_eos = sampling_params.ignore_eos
@@ -56,6 +62,9 @@ class Sequence:
 
     @property
     def num_blocks(self):
+        """
+        num_tokens // block_size 向上取整
+        """
         return (self.num_tokens + self.block_size - 1) // self.block_size
 
     @property

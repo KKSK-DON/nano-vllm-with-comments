@@ -81,6 +81,12 @@ class Qwen3Attention(nn.Module):
         if not self.qkv_bias:
             q = self.q_norm(q)
             k = self.k_norm(k)
+        """
+        注意 RoPE 是在写入 KV Cache 之前应用的。
+        所以缓存中存的是已经编码过位置信息的 K。这意味着同一个 token 在不同位置的 K 是不同的。
+        但这不影响 Prefix Cache 的正确性。
+        因为 Prefix Cache 的哈希是基于 token 序列计算的，相同的 token 序列一定对应相同的位置，所以 K 值也一定相同。
+        """
         q, k = self.rotary_emb(positions, q, k)
         o = self.attn(q, k, v)
         output = self.o_proj(o.flatten(1, -1))
